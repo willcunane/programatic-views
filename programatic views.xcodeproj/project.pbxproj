@@ -7,16 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE127564246DE2640011B76B /* programatic_viewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE127563246DE2640011B76B /* programatic_viewsTests.swift */; };
 		BEC7CD63246605560088B42D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC7CD62246605560088B42D /* AppDelegate.swift */; };
 		BEC7CD65246605560088B42D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC7CD64246605560088B42D /* SceneDelegate.swift */; };
 		BEC7CD67246605560088B42D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC7CD66246605560088B42D /* ViewController.swift */; };
 		BEC7CD6A246605560088B42D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEC7CD68246605560088B42D /* Main.storyboard */; };
 		BEC7CD6C246605570088B42D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEC7CD6B246605570088B42D /* Assets.xcassets */; };
 		BEC7CD6F246605570088B42D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEC7CD6D246605570088B42D /* LaunchScreen.storyboard */; };
-		BEC7CD7A24660D0B0088B42D /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC7CD7924660D0B0088B42D /* View.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BE127566246DE2640011B76B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEC7CD57246605560088B42D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEC7CD5E246605560088B42D;
+			remoteInfo = "programatic views";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		BE127561246DE2640011B76B /* programatic viewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "programatic viewsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE127563246DE2640011B76B /* programatic_viewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = programatic_viewsTests.swift; sourceTree = "<group>"; };
+		BE127565246DE2640011B76B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEC7CD5F246605560088B42D /* programatic views.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "programatic views.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEC7CD62246605560088B42D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEC7CD64246605560088B42D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -25,10 +38,16 @@
 		BEC7CD6B246605570088B42D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEC7CD6E246605570088B42D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEC7CD70246605570088B42D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BEC7CD7924660D0B0088B42D /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BE12755E246DE2640011B76B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BEC7CD5C246605560088B42D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -39,10 +58,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE127562246DE2640011B76B /* programatic viewsTests */ = {
+			isa = PBXGroup;
+			children = (
+				BE127563246DE2640011B76B /* programatic_viewsTests.swift */,
+				BE127565246DE2640011B76B /* Info.plist */,
+			);
+			path = "programatic viewsTests";
+			sourceTree = "<group>";
+		};
 		BEC7CD56246605560088B42D = {
 			isa = PBXGroup;
 			children = (
 				BEC7CD61246605560088B42D /* programatic views */,
+				BE127562246DE2640011B76B /* programatic viewsTests */,
 				BEC7CD60246605560088B42D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				BEC7CD5F246605560088B42D /* programatic views.app */,
+				BE127561246DE2640011B76B /* programatic viewsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,20 +88,11 @@
 		BEC7CD61246605560088B42D /* programatic views */ = {
 			isa = PBXGroup;
 			children = (
-				BEC7CD70246605570088B42D /* Info.plist */,
 				BEC7CD772466062F0088B42D /* Controller */,
-				BEC7CD76246606270088B42D /* View */,
 				BEC7CD78246606460088B42D /* Resources */,
+				BEC7CD70246605570088B42D /* Info.plist */,
 			);
 			path = "programatic views";
-			sourceTree = "<group>";
-		};
-		BEC7CD76246606270088B42D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				BEC7CD7924660D0B0088B42D /* View.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		BEC7CD772466062F0088B42D /* Controller */ = {
@@ -97,6 +118,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BE127560246DE2640011B76B /* programatic viewsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE127568246DE2640011B76B /* Build configuration list for PBXNativeTarget "programatic viewsTests" */;
+			buildPhases = (
+				BE12755D246DE2640011B76B /* Sources */,
+				BE12755E246DE2640011B76B /* Frameworks */,
+				BE12755F246DE2640011B76B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE127567246DE2640011B76B /* PBXTargetDependency */,
+			);
+			name = "programatic viewsTests";
+			productName = "programatic viewsTests";
+			productReference = BE127561246DE2640011B76B /* programatic viewsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BEC7CD5E246605560088B42D /* programatic views */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BEC7CD73246605570088B42D /* Build configuration list for PBXNativeTarget "programatic views" */;
@@ -124,6 +163,10 @@
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = Will;
 				TargetAttributes = {
+					BE127560246DE2640011B76B = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = BEC7CD5E246605560088B42D;
+					};
 					BEC7CD5E246605560088B42D = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -143,11 +186,19 @@
 			projectRoot = "";
 			targets = (
 				BEC7CD5E246605560088B42D /* programatic views */,
+				BE127560246DE2640011B76B /* programatic viewsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BE12755F246DE2640011B76B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BEC7CD5D246605560088B42D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -161,11 +212,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BE12755D246DE2640011B76B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE127564246DE2640011B76B /* programatic_viewsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BEC7CD5B246605560088B42D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEC7CD7A24660D0B0088B42D /* View.swift in Sources */,
 				BEC7CD67246605560088B42D /* ViewController.swift in Sources */,
 				BEC7CD63246605560088B42D /* AppDelegate.swift in Sources */,
 				BEC7CD65246605560088B42D /* SceneDelegate.swift in Sources */,
@@ -173,6 +231,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BE127567246DE2640011B76B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEC7CD5E246605560088B42D /* programatic views */;
+			targetProxy = BE127566246DE2640011B76B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BEC7CD68246605560088B42D /* Main.storyboard */ = {
@@ -194,6 +260,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		BE127569246DE2640011B76B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VZWC2WS5BR;
+				INFOPLIST_FILE = "programatic viewsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "cunane.programatic-viewsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/programatic views.app/programatic views";
+			};
+			name = Debug;
+		};
+		BE12756A246DE2640011B76B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VZWC2WS5BR;
+				INFOPLIST_FILE = "programatic viewsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "cunane.programatic-viewsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/programatic views.app/programatic views";
+			};
+			name = Release;
+		};
 		BEC7CD71246605570088B42D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -347,6 +453,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BE127568246DE2640011B76B /* Build configuration list for PBXNativeTarget "programatic viewsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE127569246DE2640011B76B /* Debug */,
+				BE12756A246DE2640011B76B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BEC7CD5A246605560088B42D /* Build configuration list for PBXProject "programatic views" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

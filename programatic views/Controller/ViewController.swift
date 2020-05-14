@@ -10,18 +10,20 @@ import UIKit
 
 class ViewController: UIViewController {
     
-
+    var tapCount : Int = 0
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.addSubview(facebookImage)
-        view.addSubview(facebookText)
+        view.addSubview(displayImage)
+        view.addSubview(displayText)
         setupControls()
         setupLayout()
         
     }
     
-    private let facebookImage: UIImageView = {
+    // Initalized the display image to facebook icon and is updated when next or previous is tapped
+    private let displayImage: UIImageView = {
         let imageName = "facebook_icon.png"
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
@@ -29,7 +31,7 @@ class ViewController: UIViewController {
         return imageView
     }()
     
-    private let facebookText: UITextView = {
+    private let displayText: UITextView = {
         let textView = UITextView()
         let attributedText = NSMutableAttributedString(string: "Like us on Facebook", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
         attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
@@ -45,14 +47,51 @@ class ViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("NEXT", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
         
     }()
+    
+    @objc func nextButtonTapped() {
+        tapCount += 1
+        pageCounter.currentPage += 1
+        updatePageContent()
+    }
+    
+    @objc func backButtonTapped() {
+        tapCount -= 1
+        pageCounter.currentPage -= 1
+        updatePageContent()
+    }
+    
+    // Changes image and text based off the var tapCount
+    func updatePageContent() {
+        if tapCount == -1 {
+            tapCount = 0
+        } else if tapCount == 0 {
+            displayImage.image = facebookImage.image
+        } else if tapCount == 1 {
+            displayImage.image = twitterImage.image
+            displayText.attributedText = twitterText.attributedText
+        } else if tapCount == 2 {
+            displayImage.image = instagramImage.image
+            displayText.attributedText = instagramText.attributedText
+        } else if tapCount == 3 {
+            displayImage.image = linkedinImage.image
+            displayText.attributedText = linkedinText.attributedText
+        } else if tapCount == 4 {
+            displayImage.image = youtubeImage.image
+            displayText.attributedText = youtubeText.attributedText
+        } else if tapCount == 5 {
+            tapCount = 4
+        }
+    }
     
     private let previousButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("PREV", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
         
     }()
@@ -60,27 +99,123 @@ class ViewController: UIViewController {
     private let pageCounter: UIPageControl = {
         let control = UIPageControl()
         control.currentPage = 0
-        control.numberOfPages = 4
+        control.numberOfPages = 5
         control.currentPageIndicatorTintColor = .systemBlue
         control.pageIndicatorTintColor = .gray
         return control
+    }()
+    
+    // There has to be a better way to do this
+    private let facebookImage: UIImageView = {
+        let imageName = "facebook_icon.png"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image)
+        return imageView
+    }()
+    
+    private let twitterImage: UIImageView = {
+        let imageName = "twitter_icon.png"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image)
+        return imageView
+    }()
+    
+    private let instagramImage: UIImageView = {
+        let imageName = "instagram_icon.png"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image)
+        return imageView
+    }()
+    
+    private let linkedinImage: UIImageView = {
+        let imageName = "linkedin_icon.png"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image)
+        return imageView
+    }()
+    
+    private let youtubeImage: UIImageView = {
+        let imageName = "youtube_icon.png"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image)
+        return imageView
+    }()
+    
+    private let facebookText: UITextView = {
+        let textView = UITextView()
+        let attributedText = NSMutableAttributedString(string: "Like us on Facebook", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        textView.attributedText = attributedText
+        textView.textAlignment = .center
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
+    
+    private let twitterText: UITextView = {
+        let textView = UITextView()
+        let attributedText = NSMutableAttributedString(string: "Follow us on Twitter", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        textView.attributedText = attributedText
+        textView.textAlignment = .center
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
+    
+    private let instagramText: UITextView = {
+        let textView = UITextView()
+        let attributedText = NSMutableAttributedString(string: "Follow us on Instagram", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        textView.attributedText = attributedText
+        textView.textAlignment = .center
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
+    
+    private let linkedinText: UITextView = {
+        let textView = UITextView()
+        let attributedText = NSMutableAttributedString(string: "Follow us on LinkedIn", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        textView.attributedText = attributedText
+        textView.textAlignment = .center
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
+    
+    private let youtubeText: UITextView = {
+        let textView = UITextView()
+        let attributedText = NSMutableAttributedString(string: "Subscribe to us on YouTube", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        textView.attributedText = attributedText
+        textView.textAlignment = .center
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
     }()
     
     // Sets image and text properties
     private func setupLayout() {
         
         //Facebook icon constraints
-        facebookImage.translatesAutoresizingMaskIntoConstraints = false
-        facebookImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        facebookImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        facebookImage.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        facebookImage.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        displayImage.translatesAutoresizingMaskIntoConstraints = false
+        displayImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        displayImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        displayImage.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        displayImage.heightAnchor.constraint(equalToConstant: 250).isActive = true
         
         //Description contraints
-        facebookText.topAnchor.constraint(equalTo: facebookImage.bottomAnchor, constant: 120).isActive = true
-        facebookText.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        facebookText.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-        facebookText.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        displayText.topAnchor.constraint(equalTo: displayImage.bottomAnchor, constant: 120).isActive = true
+        displayText.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        displayText.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        displayText.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         
     }
     
