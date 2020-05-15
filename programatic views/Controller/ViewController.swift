@@ -43,15 +43,6 @@ class ViewController: UIViewController {
         return textView
     }()
     
-    private let nextButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("NEXT", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        return button
-        
-    }()
-    
     @objc func nextButtonTapped() {
         tapCount += 1
         pageCounter.currentPage += 1
@@ -79,13 +70,32 @@ class ViewController: UIViewController {
         } else if tapCount == 3 {
             displayImage.image = linkedinImage.image
             displayText.attributedText = linkedinText.attributedText
+            nextButton.setTitle("NEXT", for: .normal)
         } else if tapCount == 4 {
             displayImage.image = youtubeImage.image
             displayText.attributedText = youtubeText.attributedText
+            nextButton.setTitle("DONE", for: .normal)
         } else if tapCount == 5 {
             tapCount = 4
+            loadHomeView()
+            print("Load next view")
         }
     }
+    
+    // Loads next view controller
+    fileprivate func loadHomeView() {
+        let vc = HomeViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    private let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("NEXT", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
     private let previousButton: UIButton = {
         let button = UIButton(type: .system)
@@ -93,7 +103,6 @@ class ViewController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
-        
     }()
     
     private let pageCounter: UIPageControl = {
