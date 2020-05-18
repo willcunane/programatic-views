@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         view.addSubview(displayText)
         setupControls()
         setupLayout()
-        
+        initSwipe()
     }
     
     // Initalized the display image to facebook icon and is updated when next or previous is tapped
@@ -43,43 +43,95 @@ class ViewController: UIViewController {
         return textView
     }()
     
-    @objc func nextButtonTapped() {
-        tapCount += 1
-        pageCounter.currentPage += 1
-        updatePageContent()
-    }
-    
-    @objc func backButtonTapped() {
-        tapCount -= 1
-        pageCounter.currentPage -= 1
-        updatePageContent()
-    }
+//    @objc func nextButtonTapped() {
+//        tapCount += 1
+//        pageCounter.currentPage += 1
+//        updatePageContent()
+//    }
+//
+//    @objc func backButtonTapped() {
+//        tapCount -= 1
+//        pageCounter.currentPage -= 1
+//        updatePageContent()
+//    }
     
     // Changes image and text based off the var tapCount
-    func updatePageContent() {
-        if tapCount == -1 {
-            tapCount = 0
-        } else if tapCount == 0 {
-            displayImage.image = facebookImage.image
-        } else if tapCount == 1 {
-            displayImage.image = twitterImage.image
-            displayText.attributedText = twitterText.attributedText
+//    func updatePageContent() {
+//        if tapCount == -1 {
+//            tapCount = 0
+//        } else if tapCount == 0 {
+//            displayImage.image = facebookImage.image
+//        } else if tapCount == 1 {
+//            displayImage.image = twitterImage.image
+//            displayText.attributedText = twitterText.attributedText
+//        } else if tapCount == 2 {
+//            displayImage.image = instagramImage.image
+//            displayText.attributedText = instagramText.attributedText
+//        } else if tapCount == 3 {
+//            displayImage.image = linkedinImage.image
+//            displayText.attributedText = linkedinText.attributedText
+//            nextButton.setTitle("NEXT", for: .normal)
+//        } else if tapCount == 4 {
+//            displayImage.image = youtubeImage.image
+//            displayText.attributedText = youtubeText.attributedText
+//            nextButton.setTitle("DONE", for: .normal)
+//        } else if tapCount == 5 {
+//            tapCount = 4
+//            loadHomeView()
+//            print("Load next view")
+//        }
+//    }
+    
+    // Creates swiping feature
+    func initSwipe() {
+        // sets up swiping to the left (next)
+        let swipeNext = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(swipe:)))
+        swipeNext.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeNext)
+        
+        //sets up swiping to the right (back)
+        let swipeBack = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(swipe:)))
+        swipeBack.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeBack)
+    }
+
+    // Updates image and text based off tap count
+    func updateSwipeContent() {
+        pageCounter.currentPage = tapCount
+        
+        if tapCount == 0 {
+            self.displayImage.image = self.firstImage.image
+            self.displayText.attributedText = self.firstText.attributedText
+        }   else if tapCount == 1 {
+            self.displayImage.image = self.secondImage.image
+            self.displayText.attributedText = self.secondText.attributedText
         } else if tapCount == 2 {
-            displayImage.image = instagramImage.image
-            displayText.attributedText = instagramText.attributedText
+            self.displayImage.image = self.thirdImage.image
+            self.displayText.attributedText = self.thirdText.attributedText
         } else if tapCount == 3 {
-            displayImage.image = linkedinImage.image
-            displayText.attributedText = linkedinText.attributedText
-            nextButton.setTitle("NEXT", for: .normal)
+            self.displayImage.image = self.fourthImage.image
+            self.displayText.attributedText = self.fourthText.attributedText
         } else if tapCount == 4 {
-            displayImage.image = youtubeImage.image
-            displayText.attributedText = youtubeText.attributedText
-            nextButton.setTitle("DONE", for: .normal)
+            self.displayImage.image = fithImage.image
+            self.displayText.attributedText = self.fifthText.attributedText
         } else if tapCount == 5 {
             tapCount = 4
-            loadHomeView()
-            print("Load next view")
+        } else if tapCount == -1 {
+            tapCount = 0
         }
+    }
+    
+    // When swiped to next obj...
+    @objc func swipeLeft(swipe:UISwipeGestureRecognizer) {
+        tapCount += 1
+        updateSwipeContent()
+        print(tapCount)
+    }
+    // When swiped to previous obj...
+    @objc func swipeRight(swipe:UISwipeGestureRecognizer) {
+        tapCount -= 1
+        updateSwipeContent()
+        print(tapCount)
     }
     
     // Loads next view controller
@@ -89,22 +141,7 @@ class ViewController: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
-    private let nextButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("NEXT", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private let previousButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("PREV", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
+    // Inits pagecounter
     private let pageCounter: UIPageControl = {
         let control = UIPageControl()
         control.currentPage = 0
@@ -115,45 +152,45 @@ class ViewController: UIViewController {
     }()
     
     // There has to be a better way to do this
-    private let facebookImage: UIImageView = {
+    private let firstImage: UIImageView = {
         let imageName = "facebook_icon.png"
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         return imageView
     }()
     
-    private let twitterImage: UIImageView = {
+    private let secondImage: UIImageView = {
         let imageName = "twitter_icon.png"
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         return imageView
     }()
     
-    private let instagramImage: UIImageView = {
+    private let thirdImage: UIImageView = {
         let imageName = "instagram_icon.png"
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         return imageView
     }()
     
-    private let linkedinImage: UIImageView = {
+    private let fourthImage: UIImageView = {
         let imageName = "linkedin_icon.png"
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         return imageView
     }()
     
-    private let youtubeImage: UIImageView = {
+    private let fithImage: UIImageView = {
         let imageName = "youtube_icon.png"
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         return imageView
     }()
     
-    private let facebookText: UITextView = {
+    private let firstText: UITextView = {
         let textView = UITextView()
         let attributedText = NSMutableAttributedString(string: "Like us on Facebook", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
-        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        attributedText.append(NSAttributedString(string: "\n\n\nFirst object Text Lorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
         textView.attributedText = attributedText
         textView.textAlignment = .center
         textView.isEditable = false
@@ -162,10 +199,10 @@ class ViewController: UIViewController {
         return textView
     }()
     
-    private let twitterText: UITextView = {
+    private let secondText: UITextView = {
         let textView = UITextView()
         let attributedText = NSMutableAttributedString(string: "Follow us on Twitter", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
-        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        attributedText.append(NSAttributedString(string: "\n\n\nSecond object text Lorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
         textView.attributedText = attributedText
         textView.textAlignment = .center
         textView.isEditable = false
@@ -174,10 +211,10 @@ class ViewController: UIViewController {
         return textView
     }()
     
-    private let instagramText: UITextView = {
+    private let thirdText: UITextView = {
         let textView = UITextView()
         let attributedText = NSMutableAttributedString(string: "Follow us on Instagram", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
-        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        attributedText.append(NSAttributedString(string: "\n\n\nThird object text Lorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
         textView.attributedText = attributedText
         textView.textAlignment = .center
         textView.isEditable = false
@@ -186,10 +223,10 @@ class ViewController: UIViewController {
         return textView
     }()
     
-    private let linkedinText: UITextView = {
+    private let fourthText: UITextView = {
         let textView = UITextView()
         let attributedText = NSMutableAttributedString(string: "Follow us on LinkedIn", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
-        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        attributedText.append(NSAttributedString(string: "\n\n\nFourth object text nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
         textView.attributedText = attributedText
         textView.textAlignment = .center
         textView.isEditable = false
@@ -198,10 +235,10 @@ class ViewController: UIViewController {
         return textView
     }()
     
-    private let youtubeText: UITextView = {
+    private let fifthText: UITextView = {
         let textView = UITextView()
         let attributedText = NSMutableAttributedString(string: "Subscribe to us on YouTube", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
-        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        attributedText.append(NSAttributedString(string: "\n\n\nFifth object text Lorem ipsum Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
         textView.attributedText = attributedText
         textView.textAlignment = .center
         textView.isEditable = false
@@ -230,30 +267,12 @@ class ViewController: UIViewController {
     
     // Sets control buttons and counter
     private func setupControls() {
-        view.addSubview(nextButton)
-        view.addSubview(previousButton)
         view.addSubview(pageCounter)
-        
-        //Next button constraints
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        nextButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        nextButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        
-        // Next button constraints
-        previousButton.translatesAutoresizingMaskIntoConstraints = false
-        previousButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        previousButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        previousButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        previousButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        
+                
         // Counter contsraints
         pageCounter.translatesAutoresizingMaskIntoConstraints = false
         pageCounter.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        pageCounter.centerYAnchor.constraint(equalTo: nextButton.centerYAnchor, constant: 0).isActive = true
-        pageCounter.leadingAnchor.constraint(equalTo: previousButton.trailingAnchor, constant: 5).isActive = true
-        pageCounter.trailingAnchor.constraint(equalTo: nextButton.leadingAnchor, constant: 5).isActive = true
+        pageCounter.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
     }
 }
 
