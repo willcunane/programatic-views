@@ -100,20 +100,59 @@ class ViewController: UIViewController {
         pageCounter.currentPage = tapCount
         
         if tapCount == 0 {
-            self.displayImage.image = self.firstImage.image
-            self.displayText.attributedText = self.firstText.attributedText
+           UIView.animate(withDuration: 0.20, animations: {
+                self.displayText.alpha = 0
+                self.displayImage.alpha = 0
+            }, completion: {_ in
+                self.displayImage.image = self.firstImage.image
+                self.displayText.attributedText = self.firstText.attributedText
+                self.displayText.alpha = 1
+                self.displayImage.alpha = 1
+            })
+            
         }   else if tapCount == 1 {
-            self.displayImage.image = self.secondImage.image
-            self.displayText.attributedText = self.secondText.attributedText
+            UIView.animate(withDuration: 0.20, animations: {
+                self.displayText.alpha = 0
+                self.displayImage.alpha = 0
+            }, completion: {_ in
+                self.displayImage.image = self.secondImage.image
+                self.displayText.attributedText = self.secondText.attributedText
+                self.displayText.alpha = 1
+                self.displayImage.alpha = 1
+            })
         } else if tapCount == 2 {
-            self.displayImage.image = self.thirdImage.image
-            self.displayText.attributedText = self.thirdText.attributedText
+            UIView.animate(withDuration: 0.20, animations: {
+                self.displayText.alpha = 0
+                self.displayImage.alpha = 0
+            }, completion: {_ in
+                self.displayImage.image = self.thirdImage.image
+                self.displayText.attributedText = self.thirdText.attributedText
+                self.displayText.alpha = 1
+                self.displayImage.alpha = 1
+            })
+            
         } else if tapCount == 3 {
-            self.displayImage.image = self.fourthImage.image
-            self.displayText.attributedText = self.fourthText.attributedText
+            UIView.animate(withDuration: 0.20, animations: {
+                self.displayText.alpha = 0
+                self.displayImage.alpha = 0
+            }, completion: {_ in
+                self.displayImage.image = self.fourthImage.image
+                self.displayText.attributedText = self.fourthText.attributedText
+                self.displayText.alpha = 1
+                self.displayImage.alpha = 1
+            })
+            
         } else if tapCount == 4 {
-            self.displayImage.image = fithImage.image
-            self.displayText.attributedText = self.fifthText.attributedText
+            UIView.animate(withDuration: 0.20, animations: {
+                self.displayText.alpha = 0
+                self.displayImage.alpha = 0
+            }, completion: {_ in
+                self.displayImage.image = self.fithImage.image
+                self.displayText.attributedText = self.fifthText.attributedText
+                self.displayText.alpha = 1
+                self.displayImage.alpha = 1
+            })
+            
         } else if tapCount == 5 {
             tapCount = 4
         } else if tapCount == -1 {
@@ -125,13 +164,11 @@ class ViewController: UIViewController {
     @objc func swipeLeft(swipe:UISwipeGestureRecognizer) {
         tapCount += 1
         updateSwipeContent()
-        print(tapCount)
     }
     // When swiped to previous obj...
     @objc func swipeRight(swipe:UISwipeGestureRecognizer) {
         tapCount -= 1
         updateSwipeContent()
-        print(tapCount)
     }
     
     // Loads next view controller
